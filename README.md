@@ -1,8 +1,4 @@
-# remotion-demo: Python Variables & Data Types Lesson
 
-A 60-second educational video project created with [Remotion](https://www.remotion.dev/) and React, introducing Python variables and data types to beginners with bilingual English headings and Burmese explanations.
-
----
 
 ## 💡 What is Remotion?
 
