@@ -162,6 +162,16 @@ interface Token {
 function tokenize(line: string): Token[] {
   const tokens: Token[] = [];
   const keywords = [
+    "const",
+    "let",
+    "var",
+    "function",
+    "return",
+    "import",
+    "from",
+    "export",
+    "default",
+    "as",
     "def",
     "class",
     "if",
@@ -169,10 +179,6 @@ function tokenize(line: string): Token[] {
     "else",
     "for",
     "while",
-    "return",
-    "import",
-    "from",
-    "as",
     "in",
     "not",
     "and",
@@ -193,11 +199,37 @@ function tokenize(line: string): Token[] {
     "assert",
     "del",
   ];
-  const builtins = ["print", "len", "range", "type", "int", "float", "str", "list", "dict", "set", "bool", "input", "append"];
-  const booleans = ["True", "False", "None"];
+  const builtins = [
+    "print",
+    "len",
+    "range",
+    "type",
+    "int",
+    "float",
+    "str",
+    "list",
+    "dict",
+    "set",
+    "bool",
+    "input",
+    "append",
+    "console",
+    "log",
+    "useCurrentFrame",
+    "useVideoConfig",
+    "interpolate",
+    "spring",
+    "AbsoluteFill",
+    "Composition",
+    "Sequence",
+    "MyVideo",
+    "TitleSlide",
+    "MainContent",
+  ];
+  const booleans = ["True", "False", "None", "true", "false", "null", "undefined"];
 
   // Comment line
-  if (line.trimStart().startsWith("#")) {
+  if (line.trimStart().startsWith("#") || line.trimStart().startsWith("//")) {
     return [{ text: line, color: COLORS.syntaxComment }];
   }
 
@@ -214,8 +246,8 @@ function tokenize(line: string): Token[] {
       continue;
     }
 
-    // String (double or single quoted)
-    if (line[i] === '"' || line[i] === "'") {
+    // String (double, single quoted, or template literal backtick)
+    if (line[i] === '"' || line[i] === "'" || line[i] === "`") {
       const quote = line[i];
       let str = quote;
       i++;

@@ -43,7 +43,13 @@ export const OutroSlide: React.FC<OutroSlideProps> = ({ slide }) => {
   });
 
   // Topics learned badges
-  const topics = ["Variables", "Strings", "Numbers", "Booleans", "Lists"];
+  const topics = [
+    "React + Video",
+    "Composition",
+    "Sequence",
+    "useCurrentFrame",
+    "interpolate",
+  ];
 
   // Pulsing glow
   const glowPulse = Math.sin(frame * 0.05) * 0.3 + 0.7;

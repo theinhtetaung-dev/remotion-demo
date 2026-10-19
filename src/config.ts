@@ -62,87 +62,95 @@ export interface LessonSlide {
   descriptionMm?: string;
   codeLines?: CodeLine[];
   outputLines?: string[];
-  highlightType?: "variable" | "string" | "number" | "boolean" | "list";
+  highlightType?: string;
 }
 
 export const LESSON_SLIDES: LessonSlide[] = [
   {
     id: "intro",
-    headingEn: "Python Variables & Data Types",
-    headingMm: "Python မှာ Variables နဲ့ Data Types တွေကို လေ့လာကြမယ်",
+    headingEn: "What is Remotion?",
+    headingMm: "React ဖြင့် Programmatic Video များ ဖန်တီးခြင်း",
   },
   {
-    id: "variables",
-    headingEn: "What is a Variable?",
-    headingMm: "Variable ဆိုတာ data ကို သိမ်းထားဖို့ နာမည်တစ်ခုပါ",
+    id: "overview",
+    headingEn: "React for Video Creation",
+    headingMm: "Remotion သည် React code ဖြင့် video များကို render လုပ်ပေးပါသည်",
     codeLines: [
-      { text: "# Creating variables" },
-      { text: 'name = "Aung Aung"' },
-      { text: "age = 25" },
-      { text: "is_student = True" },
+      { text: "// Define video with React" },
+      { text: "import { AbsoluteFill } from 'remotion';" },
+      { text: "export const MyVideo = () => {" },
+      { text: "  return <AbsoluteFill>Hello Remotion!</AbsoluteFill>;" },
+      { text: "};" },
     ],
-    outputLines: [],
-    highlightType: "variable",
+    outputLines: ["Rendering 1080p Video...", "Frame rate: 30 FPS"],
+    highlightType: "react",
   },
   {
-    id: "strings",
-    headingEn: "Strings — Text Data",
-    headingMm: "String ဆိုတာ စာသား (text) data အမျိုးအစားပါ",
+    id: "composition",
+    headingEn: "<Composition /> Component",
+    headingMm: "Video ၏ Resolution, FPS နှင့် ကြာချိန်ကို သတ်မှတ်ပါသည်",
     codeLines: [
-      { text: '# String examples' },
-      { text: 'greeting = "Hello, Python!"' },
-      { text: "print(greeting)" },
-      { text: "print(len(greeting))" },
+      { text: "<Composition" },
+      { text: '  id="IntroVideo"' },
+      { text: "  component={MyVideo}" },
+      { text: "  durationInFrames={1800}" },
+      { text: "  fps={30} width={1920} height={1080}" },
+      { text: "/>" },
     ],
-    outputLines: ["Hello, Python!", "14"],
-    highlightType: "string",
+    outputLines: ["Duration: 60s (1800 frames)", "Resolution: 1920x1080 (16:9)"],
+    highlightType: "composition",
   },
   {
-    id: "numbers",
-    headingEn: "Numbers — int & float",
-    headingMm: "ကိန်းပြည့် (int) နဲ့ ဒဿမကိန်း (float) နှစ်မျိုးရှိပါတယ်",
+    id: "sequence",
+    headingEn: "<Sequence /> for Timelines",
+    headingMm: "Scene များကို timeline ပေါ်တွင် အချိန်အပိုင်းအခြားဖြင့် စီစဉ်ခြင်း",
     codeLines: [
-      { text: "# Integer and Float" },
-      { text: "count = 10" },
-      { text: "price = 19.99" },
-      { text: "total = count * price" },
-      { text: "print(total)" },
+      { text: "<Sequence from={0} durationInFrames={90}>" },
+      { text: '  <TitleSlide title="Welcome" />' },
+      { text: "</Sequence>" },
+      { text: "<Sequence from={90} durationInFrames={120}>" },
+      { text: "  <MainContent />" },
+      { text: "</Sequence>" },
     ],
-    outputLines: ["199.9"],
-    highlightType: "number",
+    outputLines: ["Scene 1: 0s - 3s", "Scene 2: 3s - 7s"],
+    highlightType: "sequence",
   },
   {
-    id: "booleans",
-    headingEn: "Booleans — True / False",
-    headingMm: "Boolean ဆိုတာ True ဒါမှမဟုတ် False ပဲ ဖြစ်နိုင်ပါတယ်",
+    id: "frame",
+    headingEn: "useCurrentFrame() Hook",
+    headingMm: "လက်ရှိရောက်ရှိနေသော frame number ကို ရယူပေးပါသည်",
     codeLines: [
-      { text: "# Boolean values" },
-      { text: "is_active = True" },
-      { text: "is_empty = False" },
-      { text: "print(10 > 5)" },
-      { text: "print(3 == 7)" },
+      { text: "const frame = useCurrentFrame();" },
+      { text: "const { fps } = useVideoConfig();" },
+      { text: "const seconds = frame / fps;" },
+      { text: "console.log(`Current frame: ${frame}`);" },
     ],
-    outputLines: ["True", "False"],
-    highlightType: "boolean",
+    outputLines: ["Current frame: 75", "Time: 2.50s"],
+    highlightType: "hook",
   },
   {
-    id: "lists",
-    headingEn: "Lists — Ordered Collections",
-    headingMm: "List ဆိုတာ data အများကြီးကို စုထားလို့ ရတဲ့ အမျိုးအစားပါ",
+    id: "interpolate",
+    headingEn: "interpolate() for Animations",
+    headingMm: "Frame အလိုက် smooth animations များကို တွက်ချက်ဖန်တီးခြင်း",
     codeLines: [
-      { text: "# List example" },
-      { text: 'fruits = ["apple", "banana", "cherry"]' },
-      { text: "print(fruits[0])" },
-      { text: "fruits.append(\"mango\")" },
-      { text: "print(len(fruits))" },
+      { text: "const opacity = interpolate(" },
+      { text: "  frame," },
+      { text: "  [0, 30]," },
+      { text: "  [0, 1]," },
+      { text: "  { extrapolateRight: 'clamp' }" },
+      { text: ");" },
     ],
-    outputLines: ["apple", "4"],
-    highlightType: "list",
+    outputLines: [
+      "frame 0  -> opacity: 0.0",
+      "frame 15 -> opacity: 0.5",
+      "frame 30 -> opacity: 1.0",
+    ],
+    highlightType: "animation",
   },
   {
     id: "outro",
-    headingEn: "Great Job! Keep Practicing!",
-    headingMm: "ကောင်းပါပြီ! ဆက်ပြီး လေ့ကျင့်ပါ!",
+    headingEn: "Start Building with Remotion!",
+    headingMm: "React စွမ်းအားဖြင့် အံ့သြဖွယ် Video များကို ဖန်တီးလိုက်ပါ!",
   },
 ];
 
@@ -151,11 +159,11 @@ export const LESSON_SLIDES: LessonSlide[] = [
 // ============================================================
 
 export const SLIDE_TIMINGS = {
-  intro: { start: 0, duration: 180 },         // 0–6s
-  variables: { start: 180, duration: 270 },    // 6–15s
-  strings: { start: 450, duration: 270 },      // 15–24s
-  numbers: { start: 720, duration: 270 },      // 24–33s
-  booleans: { start: 990, duration: 270 },     // 33–42s
-  lists: { start: 1260, duration: 270 },       // 42–51s
+  intro: { start: 0, duration: 180 },          // 0–6s
+  overview: { start: 180, duration: 270 },     // 6–15s
+  composition: { start: 450, duration: 270 },  // 15–24s
+  sequence: { start: 720, duration: 270 },     // 24–33s
+  frame: { start: 990, duration: 270 },        // 33–42s
+  interpolate: { start: 1260, duration: 270 }, // 42–51s
   outro: { start: 1530, duration: 270 },       // 51–60s
 } as const;

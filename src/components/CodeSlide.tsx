@@ -198,7 +198,7 @@ export const CodeSlide: React.FC<CodeSlideProps> = ({ slide }) => {
                   marginLeft: 12,
                 }}
               >
-                lesson.py
+                Video.tsx
               </span>
             </div>
 
@@ -227,14 +227,19 @@ export const CodeSlide: React.FC<CodeSlideProps> = ({ slide }) => {
 
 function getAccentColor(type?: string): string {
   switch (type) {
+    case "react":
     case "variable":
       return COLORS.accentPrimary;
+    case "composition":
     case "string":
       return COLORS.accentSuccess;
+    case "sequence":
     case "number":
       return COLORS.accentWarning;
+    case "hook":
     case "boolean":
       return COLORS.accentTertiary;
+    case "animation":
     case "list":
       return COLORS.accentSecondary;
     default:
