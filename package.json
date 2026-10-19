@@ -1,0 +1,27 @@
+{
+  "name": "python-remotion-lesson",
+  "version": "1.0.0",
+  "description": "Beginner-friendly Python programming lesson created with Remotion",
+  "scripts": {
+    "start": "remotion studio",
+    "dev": "remotion studio",
+    "build": "remotion render PythonLesson out/python-lesson.mp4",
+    "render": "remotion render PythonLesson out/python-lesson.mp4",
+    "render:still": "remotion still PythonLesson out/thumbnail.png --frame=150"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.218",
+    "@remotion/google-fonts": "^4.0.218",
+    "@remotion/media-utils": "^4.0.218",
+    "@remotion/transitions": "^4.0.218",
+    "lucide-react": "^0.460.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.218"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
+  }
+}
